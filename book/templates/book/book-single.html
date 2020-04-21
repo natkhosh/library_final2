@@ -1,0 +1,79 @@
+{% extends "book/base.html" %}
+
+{% load static %}
+{% block content %}
+
+    <div class="breadcrumb">
+        <div class="container">
+            <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+            <span class="breadcrumb-item active">Terms and Condition</span>
+        </div>
+    </div>
+    <section class="product-sec">
+        <div class="container">
+            <h1>Harry Potter and the Philosopher's Stone </h1>
+            <div class="row">
+                <div class="col-md-6 slider-sec">
+                    <!-- main slider carousel -->
+                    <div id="myCarousel" class="carousel slide">
+                        <!-- main slider carousel items -->
+                        <div class="carousel-inner">
+                            <div class="active item carousel-item" data-slide-number="0">
+                                <img src="/static/book/images/product_1.jpg" class="img-fluid">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="1">
+                                <img src="/static/book/images/product2.jpg" class="img-fluid">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="2">
+                                <img src="/static/book/images/product3.jpg" class="img-fluid">
+                            </div>
+                        </div>
+                        <!-- main slider carousel nav controls -->
+                        <ul class="carousel-indicators list-inline">
+                            <li class="list-inline-item active">
+                                <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#myCarousel">
+                                <img src="/static/book/images/product_1.jpg" class="img-fluid">
+                            </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a id="carousel-selector-1" data-slide-to="1" data-target="#myCarousel">
+                                <img src="/static/book/images/product2.jpg" class="img-fluid">
+                            </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a id="carousel-selector-2" data-slide-to="2" data-target="#myCarousel">
+                                <img src="/static/book/images/product3.jpg" class="img-fluid">
+                            </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/main slider carousel-->
+                </div>
+                <div class="col-md-6 slider-content">
+                    <p>Harry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive. Addressed in green ink on yellowish parchment with a purple seal, they are swiftly confiscated by his grisly aunt and uncle. </p>
+                    <p>Then, on Harry's eleventh birthday, a great beetle-eyed giant of a man called Rubeus Hagrid bursts in with some astonishing news: Harry Potter is a wizard, and he has a place at Hogwarts School of Witchcraft and Wizardry. An incredible adventure is about to begin!</p>
+                    <ul>
+                        <li>
+                            <span class="name">Price</span><span class="clm">:</span>
+                            <span class="price">$25</span>
+                        </li>
+                        <li>
+                            <span class="name">Discount</span> <span class="clm">:</span>
+                            <span class="price final">10%</span>
+                        </li>
+                        <li>
+                            <span class="name">Total Price</span><span class="clm">:</span>
+                            <span class="price final">$22.5</span>
+                        </li>
+                    </ul>
+                    <div class="btn-sec">
+                        <button class="btn ">Add To cart</button>
+                        <button class="btn black">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
