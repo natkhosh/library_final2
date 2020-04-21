@@ -13,43 +13,24 @@ class IndexView(View):
 
     def get(self, request):
 
+        books = Book.objects.all()
+
         return render(request, 'book/index.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                    'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
-                                                   'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE})
+                                                   'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                   'books': books})
 
 
 class ShopView(View):
 
     def get(self, request):
 
-        books_list = [{'author': 'J. K. Rowling',
-                       'name': "Harry Potter and the Philosopher's Stone",
-                       'image': '/book/images/product_1.jpg',
-                       'year_publication': '1997',
-                       'price': '$25.00',
-                       'discount': '10%',
-                       'price_sale': '$22.50'},
-                      {'author': 'J. K. Rowling',
-                       'name': "Harry Potter and the Chamber of Secrets",
-                       'image': '/book/images/product_2.jpg',
-                       'year_publication': '1998',
-                       'price': '$25.00',
-                       'discount': '10%',
-                       'price_sale': '$22.50'},
-                      {'author': 'J. K. Rowling',
-                       'name': "Harry Potter and the Chamber of Secrets",
-                       'image': '/book/images/product_2.jpg',
-                       'year_publication': '1998',
-                       'price': '$25.00',
-                       'discount': '10%',
-                       'price_sale': '$22.50'},
-
-
-                      ]
+        books = Book.objects.all()
 
         return render(request, 'book/shop.html',  {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                    'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
-                                                   'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE})
+                                                   'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                   'books': books})
 
 class BookSingleView(View):
 
