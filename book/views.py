@@ -48,3 +48,15 @@ class BookCreate(View):
                                                              'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                              'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
                                                              'form': bound_form})
+
+
+class BookUpdate(View):
+
+    def get(self, request, name):
+        book = Book.objects.all().filter(id=name)
+        # b = book.get(id=name)
+        bound_form = BookForm(book)
+        return render(request, 'book/book_update.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                                                             'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
+                                                             'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                             'form': bound_form, 'book': book})

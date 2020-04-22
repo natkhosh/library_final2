@@ -7,12 +7,13 @@
     <div class="breadcrumb">
         <div class="container">
             <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
-            <span class="breadcrumb-item active">Create Book</span>
+            <span class="breadcrumb-item active">Book Update</span>
         </div>
     </div>
 
         <div class="container">
-            <form action="{% url 'book_create' %}" method="post" enctype="multipart/form-data">
+            <form action="['(?P<name>[^/]+)/update/$']" method="post" enctype="multipart/form-data">
+
                 {% csrf_token %}
 
                 {% for field in form %}
@@ -30,11 +31,12 @@
                 {% endfor %}
 
 
-
-                <button type="submit" class="btn btn-primary">Create book</button>
+                <button type="submit" class="btn btn-primary">Update book</button>
 
             </form>
         </div>
 
+
+    <form action=""></form>>
 
 {% endblock %}

@@ -13,5 +13,7 @@ class Book(models.Model):
     discount = models.CharField(max_length=10, blank=True, null=True)
     price_sale = models.CharField(max_length=10, blank=True, null=True)
 
+
+
     def __str__(self):
         return f'{self.id} - {self.author} - {self.name}'
