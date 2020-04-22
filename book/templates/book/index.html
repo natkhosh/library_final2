@@ -3,6 +3,12 @@
 {% load static %}
 {% block content %}
 
+    {% csrf_token %}
+
+    <link rel='stylesheet' href="{% static "shop/css/build/bundle.css" %}">
+	<script defer src="{% static "shop/js/build/bundle.js" %}"></script>
+    <a id="home-ref" hidden="true" href="{% url 'home' %}"></a>
+
     <section class="slider">
         <div class="container">
             <div id="owl-demo" class="owl-carousel owl-theme">

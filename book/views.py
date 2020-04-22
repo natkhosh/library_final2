@@ -9,6 +9,8 @@ from .models import *
 from .utils import *
 from .forms import BookForm
 
+import json
+
 # Create your views here.
 
 class IndexView(ObjectDetailMixin, View):
@@ -17,6 +19,9 @@ class IndexView(ObjectDetailMixin, View):
 
 class ShopView(ObjectDetailMixin, View):
     template = 'book/shop.html'
+
+
+
 
 
 class BookSingleView(View):

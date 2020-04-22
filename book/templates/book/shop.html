@@ -3,6 +3,12 @@
 {% load static %}
 {% block content %}
 
+    {% csrf_token %}
+
+    <link rel='stylesheet' href="{% static "shop/css/build/bundle.css" %}">
+	<script defer src="{% static "shop/js/build/bundle.js" %}"></script>
+    <a id="shop-ref" hidden="true" href="{% url 'shop' %}"></a>
+
     <div class="breadcrumb">
         <div class="container">
             <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
@@ -14,17 +20,7 @@
             <h2>recently added books to our store</h2>
             <div class="recent-book-sec">
                 <div class="row">
-
-                    {% for book in books %}
-                    <div class="col-md-3">
-                        <div class="item">
-                            <a href="{%  url 'book_single' %}"><img src="/uploads/{{book.image }}" alt="img">
-                            <h6>{{ book.author }}</h6>
-                            <h6>{{ book.name }}</h6></a>
-                            <h6><span class="price">{{ book.price_sale }}</span> / <a href="{%  url 'book_single' %}">Buy Now</a></h6>
-                        </div>
-                    </div>
-                    {% endfor %}
+                 <div id="books" ></div>
 
                 </div>
                 <div class="btn-sec">
