@@ -46,8 +46,15 @@ class BookCreate(View):
             bound_form = BookForm(request.POST, request.FILES)
             if bound_form.is_valid():
                 bound_form.save()
-                # return redirect(new_book)
-            return render(request, 'book/book_create.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                func_st = 'Book created successfully!'
+                return render(request, 'book/create_done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                                                                 'daily_offer': DAILY_OFFER, 'title': TITLE,
+                                                                 'about': ABOUT,
+                                                                 'contacts': CONTACTS, 'address': ADDRESS,
+                                                                 'website': WEBSITE,
+                                                                 'func_st': func_st})
+            else:
+                return render(request, 'book/book_create.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                              'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                              'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
                                                              'form': bound_form})
@@ -56,8 +63,9 @@ class BookCreate(View):
 class CreateDone(View):
 
     def get(self, request):
+
         func_st = 'Book created successfully!'
-        return render(request, 'book/book_update.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+        return render(request, 'book/create_done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                          'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                          'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
                                                          'func_st': func_st})
