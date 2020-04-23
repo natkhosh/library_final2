@@ -5,10 +5,6 @@
 
     {% csrf_token %}
 
-    <link rel='stylesheet' href="{% static "book/css/build/bundle.css" %}">
-	<script defer src="{% static "book/js/build/bundle.js" %}"></script>
-    <a id="home-ref" hidden="true" href="{% url 'home' %}"></a>
-
     <section class="slider">
         <div class="container">
             <div id="owl-demo" class="owl-carousel owl-theme">

@@ -4,11 +4,7 @@
 
 {% block content %}
 
-    {% csrf_token %}
 
-    <link rel='stylesheet' href="{% static "book/css/build/bundle.css" %}">
-	<script defer src="{% static "book/js/build/bundle.js" %}"></script>
-    <a id="bookcr-ref" hidden="true" href="{% url 'book_create' %}"></a>
 
     <div class="breadcrumb">
         <div class="container">
@@ -19,7 +15,7 @@
 
         <div class="container">
             <form action="{% url 'book_create' %}" method="post" enctype="multipart/form-data">
-{#                {% csrf_token %}#}
+                {% csrf_token %}
 
                 {% for field in form %}
                     <div class="form-group" >

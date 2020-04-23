@@ -14,5 +14,4 @@ async def websocket_applciation(scope, receive, send):
             if event['text'] == 'ping':
                 await send({
                     'type': 'websocket.send',
-                    'text': event['text']
                 })

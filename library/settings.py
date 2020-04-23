@@ -24,7 +24,7 @@ SESSION_SAVE_EVERY_REQUEST = True
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'book')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'book/static')
 MEDIA_URL = '/uploads/'
 
 
