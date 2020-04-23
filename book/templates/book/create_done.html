@@ -1,0 +1,22 @@
+{% extends "book/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+    <div class="breadcrumb">
+        <div class="container">
+            <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+            <span class="breadcrumb-item active">Create Book</span>
+        </div>
+    </div>
+
+
+    <div class="title">
+         <h2>{{ func_st }}</h2>
+         <hr>
+     </div>
+
+{% endblock %}

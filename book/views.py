@@ -13,15 +13,13 @@ import json
 
 # Create your views here.
 
+
 class IndexView(ObjectDetailMixin, View):
     template = 'book/index.html'
 
 
 class ShopView(ObjectDetailMixin, View):
     template = 'book/shop.html'
-
-
-
 
 
 class BookSingleView(View):
@@ -53,6 +51,16 @@ class BookCreate(View):
                                                              'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                              'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
                                                              'form': bound_form})
+
+
+class CreateDone(View):
+
+    def get(self, request):
+        func_st = 'Book created successfully!'
+        return render(request, 'book/book_update.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                                                         'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
+                                                         'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                         'func_st': func_st})
 
 
 class BookUpdate(View):
