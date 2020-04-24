@@ -33,7 +33,7 @@ class BookSingleView(View):
 
 
 class BookCreate(View):
-
+    func = 'Book created'
     def get(self, request):
         form = BookForm()
 
@@ -48,7 +48,7 @@ class BookCreate(View):
             if bound_form.is_valid():
                 bound_form.save()
                 func_st = 'Book created successfully!'
-                return render(request, 'book/create_done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                                  'daily_offer': DAILY_OFFER, 'title': TITLE,
                                                                  'about': ABOUT,
                                                                  'contacts': CONTACTS, 'address': ADDRESS,
@@ -59,17 +59,6 @@ class BookCreate(View):
                                                              'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                              'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
                                                              'form': bound_form})
-
-
-class CreateDone(View):
-
-    def get(self, request):
-
-        func_st = 'Book created successfully!'
-        return render(request, 'book/create_done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
-                                                         'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
-                                                         'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
-                                                         'func_st': func_st})
 
 
 class BookUpdate(View):
@@ -97,7 +86,11 @@ def edit(request, id):      # изменение данных в бд
             book.discount = request.POST.get("discount")
             book.price_sale = request.POST.get("price_sale")
             book.save()
-            return HttpResponseRedirect('/')
+            func_st = 'Book edited successfully!'
+            return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                                                      'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
+                                                      'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                      'func_st': func_st})
         else:
             return render(request, 'book/book_edit.html', {'book': book})
     except Book.DoesNotExist:
@@ -108,6 +101,37 @@ def delete(request, id):    # удаление данных из бд
     try:
         book = Book.objects.get(id=id)
         book.delete()
-        return HttpResponseRedirect("/")
+        func_st = 'Book deleted successfully!'
+        return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                                                  'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
+                                                  'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                  'func_st': func_st})
     except Book.DoesNotExist:
         return HttpResponseNotFound("<h2>Sorry, Book not found</h2>")
+
+
+def create_done(request):
+
+    func_st = 'Book created successfully!'
+    return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                                                     'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
+                                                     'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                     'func_st': func_st})
+
+
+def edit_done(request):
+
+    func_st = 'Book edited successfully!'
+    return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                                                     'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
+                                                     'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                     'func_st': func_st})
+
+
+def delete_done(request):
+
+    func_st = 'Book deleted successfully!'
+    return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                                                     'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
+                                                     'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                     'func_st': func_st})

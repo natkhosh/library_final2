@@ -22,6 +22,7 @@ class ObjectDetailMixin:
                                                            'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
                                                            'books': books})
         else:
+
             return HttpResponse(json.dumps({'books': books}), content_type='application/json')
 
 
