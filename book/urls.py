@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import *
+from . import views
 
 
 
@@ -9,9 +10,9 @@ urlpatterns = [
     path('shop/', ShopView.as_view(), name='shop'),
     path('book_single/', BookSingleView.as_view(), name='book_single'),
     path('create/', BookCreate.as_view(), name='book_create'),
-    path('<str:name>/update/', BookUpdate.as_view(), name='book_update'),
+    path('update/edit/<int:id>/', views.edit, name='book_edit'),
     path("create_done/", CreateDone.as_view(),  name='create_done'),
-    # path('book/', BookView.as_view(), name='book'),
-    # path('book/<int:page_id>', BookView.as_view()),
+    path("update/", BookUpdate.as_view(),  name='book_update'),
+    path('delete/<int:id>/', views.delete, name='book_delete')
 ]
 

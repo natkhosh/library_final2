@@ -22,14 +22,6 @@ class ObjectDetailMixin:
                                                            'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
                                                            'books': books})
         else:
-            print('##########')
             return HttpResponse(json.dumps({'books': books}), content_type='application/json')
 
 
-# class FuncDetailMixin:
-#     func_status = None
-#
-#     def get(self, request):
-#
-#         html = f"<html><body> {self.func_status} </body></html>"
-#         return HttpResponse(html)
