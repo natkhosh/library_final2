@@ -14,11 +14,14 @@ class BookForm(forms.Form):
 
     author.widget.attrs.update({'class': 'form-control'})
     name.widget.attrs.update({'class': 'form-control'})
-    image.widget.attrs.update({'class': 'form-control'})
+    image.widget.attrs.update({'c lass': 'form-control'})
     year_publication.widget.attrs.update({'class': 'form-control'})
     price.widget.attrs.update({'class': 'form-control'})
     discount.widget.attrs.update({'class': 'form-control'})
     price_sale.widget.attrs.update({'class': 'form-control'})
+
+    # def get(self):
+    #     pass
 
     def save(self):
         new_b = Book.objects.create(author=self.cleaned_data['author'],

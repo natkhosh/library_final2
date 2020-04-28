@@ -17,3 +17,5 @@ DAILY_OFFER = '!!! Free delivery !!!'
 ADDRESS = '191025 Saint-Petersburg Nevsky pr. 122'
 
 CONTACTS = 'Contacts'
+
+BOOK_COUNT = 'N'

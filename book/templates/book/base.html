@@ -22,9 +22,11 @@
         <div class="header-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3"><a href="#" class="web-url">{{ website }}</a></div>
+                    <div class="col-md-3"><a href="#" class="web-url">{{ website }}</a>
+                    </div>
                     <div class="col-md-6">
-                        <h5>{{ daily_offer }}</h5></div>
+                        <h5>{{ daily_offer }} - {{ book_count }}</h5>
+                    </div>
                     <div class="col-md-3">
                         <span class="ph-number">{{ phone_number }}</span>
                     </div>
@@ -56,7 +58,7 @@
                         <div class="cart my-2 my-lg-0">
                             <span>
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                            <span class="quntity">3</span>
+                            <span id="book-count" class="quntity">3</span>
                         </div>
                         <form class="form-inline my-2 my-lg-0">
                             <input class="form-control mr-sm-2" type="search" placeholder="Search here..." aria-label="Search">

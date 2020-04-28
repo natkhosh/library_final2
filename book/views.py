@@ -9,6 +9,7 @@ from .utils import *
 from .forms import BookForm
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseNotFound
+from websocket import create_connection
 
 import json
 
@@ -29,7 +30,8 @@ class BookSingleView(View):
 
         return render(request, 'book/book-single.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                       'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
-                                                      'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE})
+                                                      'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                        'book_count': BOOK_COUNT})
 
 
 class BookCreate(View):
@@ -40,7 +42,7 @@ class BookCreate(View):
         return render(request, 'book/book_create.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                          'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                          'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
-                                                         'form': form})
+                                                         'book_count': BOOK_COUNT, 'form': form})
 
     def post(self, request):
         if request.method == 'POST':
@@ -48,16 +50,18 @@ class BookCreate(View):
             if bound_form.is_valid():
                 bound_form.save()
                 func_st = 'Book created successfully!'
+
                 return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                                  'daily_offer': DAILY_OFFER, 'title': TITLE,
                                                                  'about': ABOUT,
                                                                  'contacts': CONTACTS, 'address': ADDRESS,
-                                                                 'website': WEBSITE,
+                                                                 'website': WEBSITE,  'book_count': BOOK_COUNT,
                                                                  'func_st': func_st})
             else:
                 return render(request, 'book/book_create.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                              'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                              'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                                 'book_count': BOOK_COUNT,
                                                              'form': bound_form})
 
 
@@ -66,35 +70,48 @@ class BookUpdate(View):
     def get(self, request):
         book = Book.objects.all()
 
+
         return render(request, 'book/book_update.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                        'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                        'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                         'book_count': BOOK_COUNT,
                                                        'book': book})
+
+
+# class BookUp(View):
+#
+#     def get(self, request, id):
+#         book = Book.objects.get(id=id)
+#         bound_form = BookForm(istance=book)
+#         return render(request, 'book/book_update.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+#                                                        'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
+#                                                        'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+#                                                        'book': book})
+
+
 
 
 def edit(request, id):      # изменение данных в бд
     try:
         book = Book.objects.get(id=id)
-        print('$$$$$$$$$$$$$$$$', book)
+        bound_form = BookForm(instance=book)
 
         if request.method == "POST":
-            book.author = request.POST.get("author")
-            book.name = request.POST.get("name")
-            book.image = request.POST.get("image")
-            book.year_publication = request.POST.get("year_publication")
-            book.price = request.POST.get("price")
-            book.discount = request.POST.get("discount")
-            book.price_sale = request.POST.get("price_sale")
-            book.save()
-            func_st = 'Book edited successfully!'
+            bound_form.save()
             return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                       'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                       'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
-                                                      'func_st': func_st})
+                                                      'book_count': BOOK_COUNT,
+                                                      'book': book, 'form': bound_form})
         else:
-            return render(request, 'book/book_edit.html', {'book': book})
+            return render(request, 'book/book_edit.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
+                                                      'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
+                                                      'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                           'book_count': BOOK_COUNT,
+                                                      'book': book, 'form': bound_form})
     except Book.DoesNotExist:
         return HttpResponseNotFound("<h2>Sorry, Book not found</h2>")
+
 
 
 def delete(request, id):    # удаление данных из бд
@@ -105,6 +122,7 @@ def delete(request, id):    # удаление данных из бд
         return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                   'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                   'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
+                                                  'book_count': BOOK_COUNT,
                                                   'func_st': func_st})
     except Book.DoesNotExist:
         return HttpResponseNotFound("<h2>Sorry, Book not found</h2>")
@@ -116,7 +134,7 @@ def create_done(request):
     return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                      'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                      'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
-                                                     'func_st': func_st})
+                                                    'book_count': BOOK_COUNT, 'func_st': func_st})
 
 
 def edit_done(request):
@@ -125,7 +143,7 @@ def edit_done(request):
     return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                      'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                      'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
-                                                     'func_st': func_st})
+                                                    'book_count': BOOK_COUNT, 'func_st': func_st})
 
 
 def delete_done(request):
@@ -134,4 +152,4 @@ def delete_done(request):
     return render(request, 'book/done.html', {'phone_number': PHONE_NUMBER, 'e_mail': E_MAIL,
                                                      'daily_offer': DAILY_OFFER, 'title': TITLE, 'about': ABOUT,
                                                      'contacts': CONTACTS, 'address': ADDRESS, 'website': WEBSITE,
-                                                     'func_st': func_st})
+                                                    'book_count': BOOK_COUNT,'func_st': func_st})

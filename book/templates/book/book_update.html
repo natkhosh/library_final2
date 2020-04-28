@@ -22,7 +22,7 @@
             <td>{{ field.id }}</td>
             <td>{{ field.author }}</td>
             <td>{{ field.name }}</td>
-            <td><a href="{% url 'book_edit' field.id %}">Edit</a> | <a href="{% url 'book_delete' field.id %}">Delete</a></td>
+            <td><a href="{% url 'book_edit' id=field.id %}">Edit</a> | <a href="{% url 'book_delete' id=field.id %}">Delete</a></td>
         </tr>
         {% endfor %}
     </table>

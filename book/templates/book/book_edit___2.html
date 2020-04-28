@@ -1,0 +1,64 @@
+{% extends "book/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+     <div class="breadcrumb">
+        <div class="container">
+            <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+            <span class="breadcrumb-item active">Edit Book</span>
+        </div>
+    </div>
+
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label>Author</label><br>
+
+            <input type="text" name="author" value="{{book.author}}" />
+
+        </p>
+        <p>
+            <label>Name</label><br>
+            <label>
+                <input type="text" name="name" value="{{book.name}}" />
+            </label>
+        </p>
+        <p>
+            <label>Image</label><br>
+            <label>
+                <input type="file" name="image"  accept="image/*" src="/uploads/">
+
+            </label>
+        </p>
+        <p>
+            <label>Publication year</label><br>
+            <label>
+                <input type="number" name="year_publication" value="{{book.year_publication}}" />
+            </label>
+        </p>
+        <p>
+            <label>Price</label><br>
+            <label>
+                <input type="text" name="price" value="{{book.price}}" />
+            </label>
+        </p>
+        <p>
+            <label>Discount</label><br>
+            <label>
+                <input type="text" name="discount" value="{{book.discount}}" />
+            </label>
+        </p>
+        <p>
+            <label>Price sale</label><br>
+            <label>
+                <input type="text" name="price_sale" value="{{book.price_sale}}" />
+            </label>
+        </p>
+        <input type="submit" value="Edit Book" >
+    </form>
+</div>
+
+{% endblock %}
