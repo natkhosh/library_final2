@@ -4,7 +4,9 @@
 
 {% block content %}
 
-
+    <link rel='stylesheet' href="{% static "book/css/build/bundle.css" %}">
+	<script defer src="{% static "book/js/build/bundle.js" %}"></script>
+    <a id="shop-ref" hidden="true" href="{% url 'shop' %}"></a>
 
     <div class="breadcrumb">
         <div class="container">
